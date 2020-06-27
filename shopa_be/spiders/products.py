@@ -12,14 +12,17 @@ from shopa_be.items import ProductItem
 class ProductSpider(CrawlSpider):
     name = 'products'
     allowed_domains = ['shopa.be']
+    partner = ''
+    start_urls = []
 
     rules = (
         Rule(LinkExtractor(allow=r'^https://www.shopa.be/product/'), callback='parse_item', follow=False),
+        Rule(LinkExtractor(allow=r'^https://www.shopa.be/partner/' + partner + '?'), follow=True)
     )
 
     def __init__(self, partner=None, *args, **kwargs):
-        print(partner)
         super(ProductSpider, self).__init__(*args, **kwargs)
+        self.partner = partner
         self.start_urls = ['https://www.shopa.be/partner/%s' % partner]
 
     def parse_item(self, response):
