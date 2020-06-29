@@ -25,5 +25,5 @@ Usage
 Scrape the products of the partner named `shop-name` and store the data in `output.json`:
 
 ```
-$ ./venv/bin/scrapy crawl shopa_be -a partner=shop-name -o output.json
+$ pipenv run scrapy crawl products -a partner=shop-name -o output.json
 ```
